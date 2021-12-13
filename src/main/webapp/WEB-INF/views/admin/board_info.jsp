@@ -98,15 +98,16 @@
 		
 	        <div class="bbsList">
 	          <div class="bbsList" style="text-align: left; margin-bottom: 5px;">
+	          	<!-- 게시판 카테고리  -->
 	            <span class="txt_small">게시판 선택</span>&nbsp
 	            <select class="select_list" id="b_no" name="b_no">
 	              <option value="0">전체</option>    
 		            <c:forEach items="${blist}" var="board">
 		              <option value="${board.b_no}"  ${(nDto.b_no==board.b_no)?"selected":""} >${board.b_name} </option>
-		            </c:forEach>
-
+		            </c:forEach>   
 	            </select>&nbsp
-	           	   <span class="txt_small">주제</span>&nbsp
+	            <!-- 주제 카테고리 -->
+           	    <span class="txt_small">주제</span>&nbsp
 		            <select class="select_list" id="b_cate_no" name="b_cate_no">
 		              <option value="0">전체</option>    
 		            <c:forEach items="${clist}" var="cate">

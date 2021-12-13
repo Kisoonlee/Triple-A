@@ -42,7 +42,6 @@
 			var lastpage='';
 			function btnSearch(){
 				//alert("조회버튼 클릭");
-				
 				var searchWord = $("#searchWord").val();
 				var limit=$("#limit").val();
 				var category=$("#category").val();
@@ -52,15 +51,8 @@
 				console.log(url);
 				location.href=url;
 			}
-			
-			
-			
+			//회원 활동 정보 검색
 			function search_user_info(rnum,u_no){
-				//alert("user 정보 검색이 요청되었습니다.");
- 				//var u_noint = Number(u_no);
-				//alert("rnum :" + typeof rnum + " u_id : " + typeof u_no );
-				
-				
  				$.ajax({
 					url:"./user_info",
 					data:{
@@ -70,11 +62,8 @@
 					dataType:"json",
 					contentType:"application/json; charset=utf-8;",
 					success:function(data){
-						//alert("성공");
-						//console.log(data);
-						//alert(data.rnum);
+						//화면 구현
 						selectlist(data);
-						
 					},
 					error:function(err){
 						alert("실패" + err);
@@ -82,9 +71,8 @@
 				});	 	
 			}
 			
-			
+			//조회된 회원의 HTML 처리 
 			function selectlist(data){
-				
 				try{
 	           		if(lastpage!=""){
 	           			//alert("lastpage : " + lastpage);
@@ -113,11 +101,9 @@
 				}
 				
 			}
-			
+			// 회원 탈퇴 처리
 			function member_out(rnum,u_no){
-				
 				if(confirm("선택회원을 탈퇴처리 하시겠습니까?")){
-					
 					$.ajax({
 						url:"./user_info/out"
 						,type:"post"
@@ -137,9 +123,7 @@
 						,error:function(errmsg){
 							alert(errmsg);
 						}
-					});
-					
-					
+					});		
 				}
 			}
 			

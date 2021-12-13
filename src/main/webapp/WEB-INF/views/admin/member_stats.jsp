@@ -66,15 +66,12 @@ function btnLogout(){
 <script text="text/javascript">
   myChart1();	
   function myChart1(){
-
 	$.ajax({
 		url:"./user_info/chart1"
 		,type:"post"
-		//,data:{"nDto":"${nDto}"}
 		,dataType:"json"
 		,contentType:"application/json;charset=utf-8;"
 		,success:function(data){
-			//alert(data);
 			var label=[];
 			var cdata=[]; 
 			for(var x in data){
@@ -87,7 +84,7 @@ function btnLogout(){
 			alert(errmsg);	
 		}
 	});
-  }
+  }	// 게시판 서비스 이용 현황 
 
   function myChart2(){
 
@@ -135,8 +132,8 @@ function btnLogout(){
 			}
 		});
   }
+  // 파라메터 : 챠트명 / 차트 데이타 / 챠트 타입
   function myChartDisp(label,cdata,cname,title,linetype){
-	//alert("ChartDisp : " + linetype ); 
  	const ctx2 = document.getElementById(cname).getContext('2d');
     const myChart2 = new Chart(ctx2, {
         type: linetype,
@@ -172,7 +169,7 @@ function btnLogout(){
             }
         }
     }); 
-  }
+  } // 챠트 정보 표시
 
 
 </script>

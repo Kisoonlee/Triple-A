@@ -56,53 +56,31 @@
   
   
   <script type="text/javascript">
-  
-  	
-  
     google.load("visualization", "1");
-
-    // Set callback to run when API is loaded
+    // API 로드
     google.setOnLoadCallback(drawVisualization);
-
-    //Called when the Visualization API is loaded.
+    //타임라인 
     function drawVisualization() {
-
-
-    	
-      // Create and populate a data table.
       var data = new google.visualization.DataTable();
       data.addColumn('datetime', 'start');
       data.addColumn('datetime', 'end');
       data.addColumn('string', 'content');
-	  
       var jdata=('${jlist}');
       jdata=jdata.replaceAll("\'","\"");
       var jobj=JSON.parse(jdata);
-      //console.log(jobj);
-      
-      
-      for(var i in jobj){
-		      	
-		      	//console.log(jobj[i]);  
-		      	  
-		      	
-			var sdate=new Date(jobj[i].c_sdate);
+      for(var i in jobj){	  
+			var sdate=new Date(jobj[i].c_sdate);	// 시작 일자
 			var ssdate=moment(sdate).format("YYYY/MM/DD HH:MM:SS");
-			console.log(sdate);
-			var edate=new Date(jobj[i].c_edate);
+			var edate=new Date(jobj[i].c_edate);	// 종료 일자
 			var eedate=moment(edate).format("YYYY/MM/DD HH:MM:SS");
-			console.log(edate);
-		    var title="[" + jobj[i].rnum + "]" + jobj[i].c_title;
-			console.log(title);
-			var profile='"/upload/' + jobj[i].c_thumbnail + '"';
-			console.log(profile); 
+		    var title="[" + jobj[i].rnum + "]" + jobj[i].c_title;	// 타이틀
+			var profile='"/upload/' + jobj[i].c_thumbnail + '"';	// 섬네일 이미지
 			
-			var body;
+			var body;	// HTML
 			body='<div class="wrap" style=" width:80px;height:70px;margin:2px auto;padding:2px;border:1px solid #c2c0b8;background-color:#fff;-webkit-box-shadow:0 0 60px 10px rgba(0, 0, 0, .1) inset, 0 5px 0 -4px #fff, 0 5px 0 -3px #c2c0b8, 0 11px 0 -8px #fff, 0 11px 0 -7px #c2c0b8, 0 17px 0 -12px #fff, 0 17px 0 -11px #c2c0b8;-moz-box-shadow:0 0 60px 10px rgba(0, 0, 0, .1) inset, 0 5px 0 -4px #fff, 0 5px 0 -3px #c2c0b8, 0 11px 0 -8px #fff, 0 11px 0 -7px #c2c0b8, 0 17px 0 -12px #fff, 0 17px 0 -11px #c2c0b8;box-shadow:0 0 60px 10px rgba(0, 0, 0, .1) inset, 0 5px 0 -4px #fff, 0 5px 0 -3px #c2c0b8, 0 11px 0 -8px #fff, 0 11px 0 -7px #c2c0b8, 0 17px 0 -12px #fff, 0 17px 0 -11px #c2c0b8;text-align: center;">';
 		    body+='<h1 style="font-size: 12px;font-weight: bold;margin-top: 1px;text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">' + title + '</h1>';   
 		    body+='<img src=' + profile  + ' onclick="clickCrew(' + jobj[i].c_no + ')" style="width: 55px;height: 55px;margin-top: 0px;">';
 		    body+='<a style="text-decoration: none;color: #4A4A4A !important;"></a></div>';
-			//data.addRows([[sdate,edate, body ]]);
 			data.addRows([[sdate,, body ]]);
 	   }
       

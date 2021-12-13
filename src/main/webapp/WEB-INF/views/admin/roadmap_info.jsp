@@ -65,8 +65,8 @@
 </script>
 <script text="text/javascript">
 
+	
   function myChart(){
-
 	$.ajax({
 		url:"./roadmap_info/chart1"
 		,type:"post"
@@ -87,10 +87,9 @@
 			alert(errmsg);	
 		}
 	});
-  }
+  } // 과목별 로드맵
   
   function myChart2(){
-	  //alert("myChart2");
 	  $.ajax({
 			url:"./roadmap_info/chart2"
 			,type:"post"
@@ -98,7 +97,6 @@
 			,dataType:"json"
 			,contentType:"application/json;charset=utf-8;"
 			,success:function(data){
-				//alert(data);
 				var label=[];
 				var cdata=[]; 
 				for(var x in data){
@@ -111,9 +109,9 @@
 				alert(errmsg);	
 			}
 		});
-  }
-  function myChartDisp(label,cdata,name,title){
-	  
+  } // 교재 선택 사용 현황
+  
+  function myChartDisp(label,cdata,name,title){  
  	const ctx = document.getElementById(name).getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
@@ -149,7 +147,7 @@
             }
         }
     }); 
-  }
+  } //차트 구현
 	  
  
 </script>

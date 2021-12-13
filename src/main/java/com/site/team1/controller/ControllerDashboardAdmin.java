@@ -56,9 +56,7 @@ public class ControllerDashboardAdmin {
 		List<BoardCateAdminVo> clist=boardCateAdminService.selectBoardCate(nDto.getB_no());
 		List<BoardPostAdminVo> plist=boardPostAdminService.selectBoardPost(nDto);
 		int listcount=boardPostAdminService.selectBoardPostCount(nDto);
-		
 		nDto.setListcount(listcount);
-		
 		model.addAttribute("blist",blist);
 		model.addAttribute("clist",clist);
 		model.addAttribute("plist",plist);
@@ -66,18 +64,16 @@ public class ControllerDashboardAdmin {
 	
 		return "admin/board_info";
 	}//보드 인포
-	
+
 	@RequestMapping("/admin/board_detail")
 	public String boardinfoDetail(HttpServletRequest request
 									, @RequestParam int b_post_no
 									, BoardNumberVo nDto
 									, Model model) {
-		
 		//게시글 정보
 		BoardPostAdminVo bDto=boardAdminService.selectBoardPostbyNo(b_post_no);
 		//댓글 정보
 		List<BoardCommentAdminVo> clist=boardAdminService.selectBoardComments(b_post_no);
-		
 		//첨부 파일 정보
 		List<BoardFileAdminVo> flist=boardAdminService.selectBoardFiles(b_post_no);
 		//게시물 신고정보
@@ -85,13 +81,11 @@ public class ControllerDashboardAdmin {
 		//추천인 정보
 		//List<board>
 		List<BoardRecommandVo> llist=boardAdminService.selectBoardRecommand(b_post_no);
-		
-		model.addAttribute("nDto",nDto);
+		model.addAttribute("nDto",nDto);	// 페이지 정보 DTO
 		model.addAttribute("bDto",bDto);
 		model.addAttribute("clist",clist);
 		model.addAttribute("flist",flist);
 		model.addAttribute("rlist",rlist);
-		
 		return "admin/boarddetail";
 	}
 	
@@ -104,6 +98,7 @@ public class ControllerDashboardAdmin {
 		System.out.println("게시물 분류 -" + nDto.getB_cate_no());
 		System.out.println("분류 카테고리 -" + nDto.getCategory());
 		System.out.println("검색 조건 -" + nDto.getSearchWord());
+		
 		
 		List<BoardAdminVo> blist = boardAdminService.selectBoardList();
 		List<BoardCateAdminVo> clist=boardCateAdminService.selectBoardCate(nDto.getB_no());
@@ -131,20 +126,17 @@ public class ControllerDashboardAdmin {
 			
 			for(BoardRecommandVo c : rlist ) {
 				jObj = new JSONObject();
-				jObj.put("b_comm_like_no",c.getB_comm_like_no());
-				jObj.put("b_comm_no",c.getB_comm_no());
-				jObj.put("b_comm_like_date",c.getB_comm_like_date());
-				jObj.put("u_name",c.getU_name());
+				jObj.put("b_comm_like_no",c.getB_comm_like_no());	//추천
+				jObj.put("b_comm_no",c.getB_comm_no());	// 댓글
+				jObj.put("b_comm_like_date",c.getB_comm_like_date());	//추천일자
+				jObj.put("u_name",c.getU_name());	// 등록자
 				jArray.add(jObj);
 			}
 			System.out.println("lise_count : " + rlist.size());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		result=jArray.toJSONString();
-		System.out.println(result);
-		
+		result=jArray.toJSONString();	
 		return jArray;	
 	}
 	
